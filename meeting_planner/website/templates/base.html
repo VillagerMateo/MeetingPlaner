@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'website/style.css' %}"> 
+    <STYLE TYPE="text/css">
+        a {text-decoration: none;}
+        a:hover {text-decoration: red;}
+    </STYLE>
+</head>
+<body>
+    <a href="{% url 'welcome' %}"><h1>Meeting App</h1></a>
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+    
+</body>
+</html>
