@@ -41,3 +41,10 @@ def updateMeeting(request, pk):
             return redirect('welcome')
 
     return render(request, 'meetings/new.html', {'form': form})
+
+def deleteMeeting(request, pk):
+    meeting = Meeting.objects.get(id=pk)
+    if request.method == 'POST':
+        meeting.delete()
+        return redirect('welcome')
+    return render(request, 'meetings/delete.html', {'obj': meeting})
