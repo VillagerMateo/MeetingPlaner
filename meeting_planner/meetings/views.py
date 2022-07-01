@@ -29,3 +29,15 @@ def new(request):
     else:
         form = MeetingForm
     return render(request, "meetings/new.html", {'form': form})
+
+def updateMeeting(request, pk):
+    meeting = Meeting.objects.get(id=pk)
+    form = MeetingForm(instance=meeting)
+
+    if request.method == 'POST':
+        form = MeetingForm(request.POST, instance=meeting)
+        if form.is_valid():
+            form.save()
+            return redirect('welcome')
+
+    return render(request, 'meetings/new.html', {'form': form})
