@@ -4,6 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404, redirect
 from django.forms import modelform_factory
 # from .forms import MeetingForm
 from .models import Meeting, Room
+# from django.db.models.functions import ExtractMonth
 
 
 def detail(request, id):
@@ -58,5 +59,4 @@ def deleteMeeting(request, pk):
 
 # def displayMonth(request):
 #     formatDate = Meeting.data.strftime("%B")
-#     return render(request, "meetings/detail.html",
-#         {"months": formatDate})
+#     return render(request, "meetings/detail.html", {"months": formatDate})

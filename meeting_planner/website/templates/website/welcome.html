@@ -7,25 +7,69 @@
     <hr> -->
 
     
-    <ul>
-        {% for meeting in meetings %}
-        <li>
-            <a href="{% url 'detail' meeting.id %}">
-                <b>{{meeting.title}}</b> - <small>{{meeting.data}}</small>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
+    
+<div class="home-container">
     <div>
+        <h3>Month view</h3>
+        <hr>
+        <ul>
+            <li>
+                <b>All</b>
+            </li>
+            
+            {% for i in niewiem %}
+           
+                <!-- <div>
+                    <b>{{i.data|date:"F"}}</b>
+                </div> -->
+    
+                <div>
+                    <li>
+                        <b>{{i}}</b>
+                    </li>
+                    
+                </div>
+    
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <ul>
+            {% for meeting in meetings %}
+            <div>
+                <a href="{% url 'detail' meeting.id %}">
+                    <b>{{meeting.title}}</b> - <small>{{meeting.data}}</small>
+                </a>
+            </div>
+            
+            
+            {% endfor %}
+        </ul>
         <div>
-            <a href="{% url 'new' %}" class="row" style="text-decoration: none">Create new meeting</a>
-        </div>
-       
-        <div>
-            <a href="{% url 'rooms' %}" class="row">Go to rooms list</a>
+            <div>
+                <a href="{% url 'new' %}" class="row" style="text-decoration: none">Create new meeting</a>
+            </div>
+           
+            <div>
+                <a href="{% url 'rooms' %}" class="row">Go to rooms list</a>
+            </div>
+            
         </div>
         
     </div>
+</div>
+    
 
 
 {% endblock %}
+
+    
+
+    
