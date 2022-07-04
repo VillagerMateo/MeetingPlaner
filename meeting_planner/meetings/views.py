@@ -1,19 +1,19 @@
+from datetime import date
 from django.shortcuts import redirect, render, get_object_or_404, redirect
 # modelform_factory tworzy formularz na podstawie danej klasy/modelu
 from django.forms import modelform_factory
 # from .forms import MeetingForm
 from .models import Meeting, Room
 
-# Create your views here.
-def detail(request, id):
 
+def detail(request, id):
     # meeting = Meeting.objects.get(pk=id)
     # Jeśli nie ma pożądanego obiektu w bazie, wyświetli się błąd 404
     meeting = get_object_or_404(Meeting, pk=id)
     return render(request, 'meetings/detail.html', {"meeting": meeting})
 
-def rooms_list(requeste):
-    return render(requeste, "meetings/rooms_list.html",
+def rooms_list(request):
+    return render(request, "meetings/rooms_list.html",
         {"rooms": Room.objects.all()})
 
 # Stworzy formularz HTML na podstawie modelu Meeting
@@ -48,3 +48,15 @@ def deleteMeeting(request, pk):
         meeting.delete()
         return redirect('welcome')
     return render(request, 'meetings/delete.html', {'obj': meeting})
+
+# def autoDelMeeting(pk):
+#     meeting = Meeting.objects.get(id=pk)
+#     if Meeting.data <= date.today():
+#         meeting.delete()
+    # return render(request, 'meetings/delete.html', {'obj': meeting})
+
+
+# def displayMonth(request):
+#     formatDate = Meeting.data.strftime("%B")
+#     return render(request, "meetings/detail.html",
+#         {"months": formatDate})

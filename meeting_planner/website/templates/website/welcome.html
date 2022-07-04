@@ -5,15 +5,13 @@
 {% block content %}
     <!-- <h1>Welcome to the meeting app</h1>
     <hr> -->
-    <p>
-        You can check which one room is free.
-    </p>
+
     
     <ul>
         {% for meeting in meetings %}
         <li>
             <a href="{% url 'detail' meeting.id %}">
-                {{meeting.title}}
+                <b>{{meeting.title}}</b> - <small>{{meeting.data}}</small>
             </a>
         </li>
         {% endfor %}
