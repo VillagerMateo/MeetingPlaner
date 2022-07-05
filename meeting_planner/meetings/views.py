@@ -2,9 +2,8 @@ from datetime import date
 from django.shortcuts import redirect, render, get_object_or_404, redirect
 # modelform_factory tworzy formularz na podstawie danej klasy/modelu
 from django.forms import modelform_factory
-# from .forms import MeetingForm
 from .models import Meeting, Room
-# from django.db.models.functions import ExtractMonth
+from .forms import RoomForm
 
 
 def detail(request, id):
@@ -49,3 +48,20 @@ def deleteMeeting(request, pk):
         return redirect('welcome')
     return render(request, 'meetings/delete.html', {'obj': meeting})
     
+
+def createRoom(request):
+    form = RoomForm()
+    if request.method == 'POST':
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('rooms')
+
+    return render(request, 'meetings/new_room.html', {'form':form})
+
+def deleteRoom(request, pk):
+    room = Room.objects.get(id=pk)
+    if request.method == 'POST':
+        room.delete()
+        return redirect('rooms')
+    return render(request, 'meetings/delete_room.html', {'obj':room})

@@ -5,8 +5,15 @@
 {% block content %}
     <h2>{{meeting.title}}</h2>
     <p>
-        This meeting has been schedule on {{meeting.data}}, at {{meeting.start_time}} in 
+        <div>
+            <small>Created by <span>@{{meeting.user}}</span></small>
+        </div>
+        
+        <div>
+            This meeting has been schedule on {{meeting.data}}, at {{meeting.start_time}} in 
         <strong>{{meeting.room}}</strong>.
+        </div>
+        
 
         
     </p>
@@ -19,6 +26,6 @@
     </div>
 
     <div>
-        <a href="{% url 'welcome' %}">Back to main site</a>
+        <a href="{{request.META.HTTP_REFERER}}">Back</a>
     </div>
 {% endblock %}

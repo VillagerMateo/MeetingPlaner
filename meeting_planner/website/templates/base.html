@@ -11,7 +11,12 @@
     </STYLE>
 </head>
 <body>
-    <a href="{% url 'welcome' %}"><h1>Meeting App</h1></a>
+    <a href="{% url 'welcome' %}"><h1>Meeting Planner</h1></a>
+    
+    <form method="GET" action="{% url 'welcome' %}">
+        <input type="text" name="n" placeholder="Search Meeting..." />
+    </form>
+
     <hr>
 
     {% block content %}

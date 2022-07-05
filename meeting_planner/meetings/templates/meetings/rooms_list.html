@@ -6,10 +6,16 @@
     <h2>Rooms</h2>
     <ul>
         {% for room in rooms %}
-        <li>
-            {{room}}
-        </li>
+        <div>
+            <li>
+                <b>{{room}}</b> <a href="{% url 'delete_room' room.id %}"><small>Delete</small></a>
+            </li>
+        </div>
+        
         {% endfor %}
     </ul>
+    <div>
+        <a href="{% url 'add_room' %}">Add room</a>
+    </div>
     
 {% endblock %}

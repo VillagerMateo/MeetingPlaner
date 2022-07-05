@@ -1,3 +1,4 @@
+from turtle import title
 from django.db import connection
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -8,24 +9,33 @@ from meetings.models import Meeting
 
 def welcome(request):
 
-    q = request.GET.get('q')
+    n = request.GET.get('n') if request.GET.get('n') != None else ''
+    print(n)
+    q = request.GET.get('q') #if request.GET.get('q') != None else ''
     print(q)
+    
 
     meetings = []
     months = []
+
     posts = Meeting.objects.raw("SELECT id, data FROM meetings_meeting ORDER BY data")
-
-
+    
     for s in posts:
         nr_id = s.id
         month = s.data.strftime("%B")
+            
         if month not in months:
             months.append(month)
 
         if q == month:
             meetings.append(Meeting.objects.get(id=nr_id))
-        elif q == None or '':
-            meetings = Meeting.objects.all()
+            
+    if n != '' or n != None and q == '' or q == None:
+        meetings = Meeting.objects.filter(title__contains=n)
+
+    elif q == '' or q == None and n == '' or n == None:
+        meetings = Meeting.objects.all()
+    
     
     return render(request, 'website/welcome.html', {"meetings": meetings, 'months': months})
 
