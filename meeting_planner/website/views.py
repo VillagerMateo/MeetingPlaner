@@ -5,43 +5,34 @@ from datetime import datetime
 
 from meetings.models import Meeting
 
-# Create your views here.
 
 def welcome(request):
 
+    q = request.GET.get('q')
+    print(q)
+
+    meetings = []
     months = []
     posts = Meeting.objects.raw("SELECT id, data FROM meetings_meeting ORDER BY data")
+
+
     for s in posts:
-        
+        nr_id = s.id
         month = s.data.strftime("%B")
         if month not in months:
-        # print(month)
             months.append(month)
-    # print(connection.queries)
-    # maslo = posts.strftime("%B")
+
+        if q == month:
+            meetings.append(Meeting.objects.get(id=nr_id))
+        elif q == None or '':
+            meetings = Meeting.objects.all()
     
-    print(months)
-    # return render(request, 'website/welcome.html', {'niewiem': months})
-    
-    return render(request, 'website/welcome.html',{"meetings": Meeting.objects.all(), 'niewiem': months})
+    return render(request, 'website/welcome.html', {"meetings": meetings, 'months': months})
+
 
 def date(request):
     return HttpResponse('Ta strona otworzyła się o' + str(datetime.now()))
 
+
 def about(request):
     return HttpResponse('Jakieś tekst')
-
-# def showMonth(request):
-#     months = []
-#     posts = Meeting.objects.raw("SELECT id, data FROM meetings_meeting ORDER BY data")
-#     for s in posts:
-        
-#         month = s.data.strftime("%B")
-#         if month not in months:
-#         # print(month)
-#             months.append(month)
-#     # print(connection.queries)
-#     # maslo = posts.strftime("%B")
-    
-#     print(months)
-#     return render(request, 'website/welcome.html', {'niewiem': months})

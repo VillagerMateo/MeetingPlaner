@@ -8,7 +8,6 @@ from .models import Meeting, Room
 
 
 def detail(request, id):
-    # meeting = Meeting.objects.get(pk=id)
     # Jeśli nie ma pożądanego obiektu w bazie, wyświetli się błąd 404
     meeting = get_object_or_404(Meeting, pk=id)
     return render(request, 'meetings/detail.html', {"meeting": meeting})
@@ -49,14 +48,4 @@ def deleteMeeting(request, pk):
         meeting.delete()
         return redirect('welcome')
     return render(request, 'meetings/delete.html', {'obj': meeting})
-
-# def autoDelMeeting(pk):
-#     meeting = Meeting.objects.get(id=pk)
-#     if Meeting.data <= date.today():
-#         meeting.delete()
-    # return render(request, 'meetings/delete.html', {'obj': meeting})
-
-
-# def displayMonth(request):
-#     formatDate = Meeting.data.strftime("%B")
-#     return render(request, "meetings/detail.html", {"months": formatDate})
+    

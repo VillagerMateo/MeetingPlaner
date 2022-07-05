@@ -3,8 +3,7 @@
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-    <!-- <h1>Welcome to the meeting app</h1>
-    <hr> -->
+
 
     
 <style>
@@ -20,21 +19,16 @@
         <hr>
         <ul>
             <li>
-                <b>All</b>
+                <a href="{% url 'welcome' %}">All</a>
             </li>
             
-            {% for i in niewiem %}
-           
-                <!-- <div>
-                    <b>{{i.data|date:"F"}}</b>
-                </div> -->
-    
-                <div>
-                    <li>
-                        <b>{{i}}</b>
-                    </li>
+            {% for i in months %}    
+            <div>
+                <li>
+                    <a href="{% url 'welcome' %}?q={{i}}">{{i}}</a>
+                </li>
                     
-                </div>
+            </div>
     
             {% endfor %}
         </ul>
@@ -42,14 +36,14 @@
 
     <div>
         <ul>
-            {% for meeting in meetings %}
-            <div>
-                <a href="{% url 'detail' meeting.id %}">
-                    <b>{{meeting.title}}</b> - <small>{{meeting.data}}</small>
-                </a>
-            </div>
+            {% for meeting in meetings%}
             
-            
+                <div>
+                    <a href="{% url 'detail' meeting.id %}">
+                        <b>{{meeting.title}}</b> <small>{{meeting.data}}</small>
+                    </a>
+                     
+                </div>            
             {% endfor %}
         </ul>
         <div>
