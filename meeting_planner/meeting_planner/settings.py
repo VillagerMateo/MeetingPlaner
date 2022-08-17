@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#$nna$z2%(k$*tf@a^s1fn^x#e9d+aq2$gzj)syn7y5g5%mo%t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'simplemeetingplanner.herokuapp.com']
 
 
 # Application definition
